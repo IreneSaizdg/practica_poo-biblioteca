@@ -3,8 +3,6 @@
 
 // VARIABLES -> EVENTOS -> FUNCIONES -> INVOCACIONES//
 
-
-
 /*
 PSEUDO-CÓDIGO
 
@@ -54,7 +52,6 @@ Entrada:
         - Recoger los datos de la entrada de libros
         - Con esa info pintar las cards de cada libro y su disponibilidad
 
-
     Reservar libro??
         - EVENTO button -> RESERVAR LIBRO y cambia su disponibilidad a: reservado
    
@@ -65,7 +62,18 @@ Salida:
 }
 */
 
+
+
+
+
 //VARIABLES------------------------------------------------------------------------------//
+
+//Llamadas al DOM
+
+
+
+
+
 
 //Clase Libro -----
 class Libro{
@@ -153,7 +161,6 @@ class Biblioteca{
         }
     }
     
-
     mostrarLibros(){
         if(this.libros.length === 0){
             console.log(`No hay libros en la biblioteca "${this.nombre}."`)
@@ -162,8 +169,6 @@ class Biblioteca{
         }
     }
 }
-
-
 
 /*Comprobaciones de métodos
     //agregarLibro
@@ -186,3 +191,9 @@ class Biblioteca{
     biblioteca1.devolverLibro(2222)
     biblioteca1.devolverLibro(4444)
 */
+
+
+
+
+//EVENTOS ------------------------------------------------------------------------------//
+
