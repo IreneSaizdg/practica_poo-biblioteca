@@ -64,3 +64,125 @@ Entrada:
 Salida:
 }
 */
+
+//VARIABLES------------------------------------------------------------------------------//
+
+//Clase Libro -----
+class Libro{
+    constructor(titulo, autor, isbn){
+        this.titulo = titulo;
+        this.autor = autor;
+        this.isbn = isbn;
+        this._estado = "disponible"; // Estado por defecto
+    }
+
+    prestar(){
+        this._estado = "prestado";
+    }
+
+    devolver(){
+        this._estado = "disponible";
+    }
+
+    getEstado(){
+        return this._estado; //Estado por default
+    }
+}
+
+/*Comprobaciones de estado del libro
+    const libro1 = new Libro("libro1", "autor1", 11111)
+    console.log(libro1.getEstado())
+
+    libro1.prestar()
+    console.log(libro1._estado)
+
+    libro1.devolver()
+    console.log(libro1._estado)*/
+
+
+//Clase Biblioteca -----
+class Biblioteca{
+    constructor (nombre){
+        this.nombre = nombre
+        this.libros = [] //array de libros
+    }
+
+    agregarLibro(libro){
+        this.libros.push(libro);
+    }
+
+    buscarPorISBN(isbn){
+        const libroEncontrado = this.libros.find((libro) => libro.isbn === isbn) //Devuelve el libro si lo encuentra, si no da undefined. 
+        if (libroEncontrado){
+            console.log(`El libro encontrado con ISBN ${libroEncontrado.isbn} es: "${libroEncontrado.titulo}" del autor "${libroEncontrado.autor}" y está "${libroEncontrado._estado}".`);
+            return libroEncontrado;
+        }else{
+            console.log(`Libro con isbn "${isbn}" no encontrado.`);
+            return undefined;
+        }
+    }
+
+    prestarLibro(isbn){
+        const libroADevolver = this.buscarPorISBN(isbn);
+        
+        if (!libroADevolver){
+            console.log("Este libro existe en esta biblioteca.");
+            return; //Para salir de la función
+
+        }else if (libroADevolver._estado === "prestado"){
+            console.log(`Este libro no está disponible.`)
+
+        }else if (libroADevolver._estado === "disponible"){
+            libroADevolver.prestar()
+            console.log(`Libro prestado, ahora está: "${libroADevolver._estado}"`)
+        }
+    }
+
+    devolverLibro(isbn){
+        const libroADevolver = this.buscarPorISBN(isbn);
+
+        if (!libroADevolver){
+            console.log("No sepuede devolver poque este libro no pertenece a esta biblioteca.");
+            return;
+
+        }else if (libroADevolver._estado === "prestado"){
+            libroADevolver.devolver();
+            console.log(`Libro devuelto, ahora está: "${libroADevolver._estado}".`)
+        }else{
+            console.log(`Este libro ya estaba devuelto.`);
+        }
+    }
+    
+
+    mostrarLibros(){
+        if(this.libros.length === 0){
+            console.log(`No hay libros en la biblioteca "${this.nombre}."`)
+        }else{
+            return this.libros;
+        }
+    }
+}
+
+
+
+/*Comprobaciones de métodos
+    //agregarLibro
+    console.log("AGREGAR LIBRO -----------------")
+    const biblioteca1 = new Biblioteca("biblioteca1")
+    const libro2 = new Libro("libro2", "autor2", 2222)
+    const libro3 = new Libro("libro3", "autor3", 3333)
+    biblioteca1.agregarLibro(libro2)
+    biblioteca1.agregarLibro(libro3)
+    //buscarLibro
+    console.log("BUSCAR LIBRO -----------------")
+    biblioteca1.buscarPorISBN(2222)
+    biblioteca1.buscarPorISBN(3333)
+    //prestarLibro
+    console.log("PRESTAR LIBRO -----------------")
+    biblioteca1.prestarLibro(2222)
+    biblioteca1.prestarLibro(2222)
+    //devolverLibro
+    console.log("DEVOLVER LIBRO -----------------")
+    biblioteca1.devolverLibro(2222)
+    biblioteca1.devolverLibro(4444)
+*/
