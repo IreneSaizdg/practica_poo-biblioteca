@@ -211,9 +211,6 @@ bookEntryForm.addEventListener("submit", function(event) {
 
     const bookData = getFormData(); //Coge los datos de la función
     addBookToLibrary(bookData); //Pasa los datos como argumento y los añade al array libros
-    printBookRow(); //Con los datos recibidos pinta la fila
-
-    //bookEntryForm.reset(); // Limpiar formulario después de añadir
 });
 
 
