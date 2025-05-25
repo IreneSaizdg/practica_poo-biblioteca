@@ -282,3 +282,17 @@ function printBookRow() {
         tdDevolucion.append(tdDevolucionButton);
     });
 }
+
+
+
+//TODO: crear evento RESERVA (funcionalidad)
+    /*- Crear evento, 
+        Como argumento toma (click, function(){})
+        Y en las instrucciones de la función llama al método del objeto biblioteca prestarLibro
+        *Habrá que delegar el evento
+    */
+//TODO: crear evento DEVOLUCION (funcionalidad)
+//TODO: guardar el listado de libros en el Web Storage
+     /* Establecer la biblioteca completa en el Web Storage??
+    */
+//TODO: css
