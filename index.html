@@ -8,7 +8,67 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-   
+    <header>
+        <h1>Préstamo de libros</h1>
+    </header>    
+
+    <main>
+        <!--Formulario de entrada de libros -->
+        <section id="bookEntryForm">
+            <form action="/my-handling-form-page" method="post">
+                <fieldset>
+                    <legend>Añadir un nuevo libro al catálogo</legend>
+                    <p>
+                        <label for="bookTitle">Título</label>
+                        <input type="text" id="bookTitle" name="bookTitle" required/>
+                    </p>
+                    <p>
+                        <label for="bookAuthor">Autor:</label>
+                        <input type="email" id="bookAuthor" name="bookAuthor" required/>
+                    </p>
+                    <p>
+                        <label for="bookISBN">ISBN:</label>
+                        <input type="email" id="bookISBN" name="bookISBN" required/>
+                    </p>
+                    <p><button type="submit">AÑADIR NUEVO LIBRO</button></p>
+                </fieldset>
+            </form>
+        </section>
+
+
+        <br><br>
+       
+        <!--Listado/Tabla de libros -->
+        <section id="bookListContainer">
+            <table  border="1" cellspacing="0">
+                <caption> Listado de libros</caption>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>ISBN</th>
+                        <th>Estado</th>
+                        <th>Reserva</th>
+                        <th>Devolución</th>
+                    </tr>
+                </thead>
+                <tbody id="bookListBody">
+                    <tr class="bookListRow">
+                        <td>Título</td>
+                        <td>Autor</td>
+                        <td>ISBN</td>
+                        <td class="bookStatus">disponible/prestado</td>
+                        <td>
+                            <button class="buttonReserva">RESERVA</button>
+                        </td>
+                        <td>
+                            <button class="buttonDevolucion">DEVOLUCIÓN</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
     <script src="js/main.js"></script>
 </body>
 </html>
