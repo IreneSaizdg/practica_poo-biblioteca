@@ -211,6 +211,10 @@ bookEntryForm.addEventListener("submit", function(event) {
 
     const bookData = getFormData(); //Coge los datos de la función
     addBookToLibrary(bookData); //Pasa los datos como argumento y los añade al array libros
+
+    printBookRow(); //Con los datos recibidos pinta la fila
+
+    bookEntryForm.reset(); // Limpiar formulario después de añadir
 });
 
 
@@ -233,11 +237,48 @@ function getFormData() {
     return libro;
 }
 
-
-
 //Función añadir libro y sus datos a la biblioteca
 function addBookToLibrary(bookData) {
     const newBook = new Libro(bookData.titulo, bookData.autor, bookData.isbn); //Crea una instancia de la clase libro
     myFirstLibrary.agregarLibro(newBook); //Agrega el libro al array de libros mediante el método de la clase Biblioteca
 }
 
+
+
+//Función obtener el array de libros
+function getBooks() {
+    return myFirstLibrary.mostrarLibros(); //Devuelve el array de libros mediante el método de la clase Biblioteca
+}
+
+//Función imprimir fila de libro agregado
+function printBookRow() {
+    bookListBody.innerHTML = ""; // Limpiar el contenedor antes de imprimir el siguiente. Se imprime uno cada vez. 
+
+    const libros = getBooks(); 
+    //Llama a la función que crea el array de libros y guarda su valor para después recorrerlo y generar cada card del array. 
+
+    libros.forEach(libro => {
+        const bookListRow = document.createElement("tr");
+        bookListRow.classList.add("bookListRow");
+
+        const tdTitulo = document.createElement("td");
+        tdTitulo.textContent = libro.titulo;
+        const tdAutor = document.createElement("td");
+        tdAutor.textContent = libro.autor;
+        const tdISBN = document.createElement("td");
+        tdISBN.textContent = libro.isbn;
+        const tdEstado = document.createElement("td");
+        tdEstado.textContent = libro._estado;
+        const tdReserva = document.createElement("td");
+        const tdReservaButton = document.createElement("button");
+        tdReservaButton.textContent = "RESERVA";
+        const tdDevolucion = document.createElement("td");
+        const tdDevolucionButton = document.createElement("button");
+        tdDevolucionButton.textContent = "DEVOLUCIÓN";
+
+        bookListBody.append(bookListRow);
+        bookListRow.append(tdTitulo, tdAutor, tdISBN, tdEstado, tdReserva, tdDevolucion);
+        tdReserva.append(tdReservaButton);
+        tdDevolucion.append(tdDevolucionButton);
+    });
+}
