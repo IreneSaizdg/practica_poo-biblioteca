@@ -47,6 +47,12 @@ Entrada:
         - Rellenar formulario de aporte de datos sobre libro
         - EVENTO button -> INSERTAR LIBRO en lista de libros
 
+    - 1º capturar los datos del formulario en una función
+    - 2º meter esos datos en el array de una biblioteca
+    - 3º desde ese array de la biblioteca coger los datos
+    - 4º con esos datos imprimir la row del libro nuevo
+    - 5º Que se active todo al hacer click en el botón (en el evento)
+
 
     Consulta de todos los libros disponibles??
         - Recoger los datos de la entrada de libros
@@ -69,8 +75,8 @@ Salida:
 //VARIABLES------------------------------------------------------------------------------//
 
 //Llamadas al DOM
-
-
+const bookEntryForm = document.querySelector("#bookEntryForm");
+const bookListBody = document.querySelector("#bookListBody");
 
 
 
@@ -169,6 +175,9 @@ class Biblioteca{
         }
     }
 }
+//Crear la biblioteca 
+const myFirstLibrary = new Biblioteca("My first library");
+
 
 /*Comprobaciones de métodos
     //agregarLibro
@@ -196,4 +205,42 @@ class Biblioteca{
 
 
 //EVENTOS ------------------------------------------------------------------------------//
+
+bookEntryForm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Previene la acción automática
+
+    const bookData = getFormData(); //Coge los datos de la función
+    addBookToLibrary(bookData); //Pasa los datos como argumento y los añade al array libros
+    printBookRow(); //Con los datos recibidos pinta la fila
+
+    //bookEntryForm.reset(); // Limpiar formulario después de añadir
+});
+
+
+
+
+
+//FUNCIONES ------------------------------------------------------------------------------//
+//Función obtener los datos del formulario
+function getFormData() {
+    const titulo = document.querySelector("#titulo").value;
+    const autor = document.querySelector("#autor").value;
+    const isbn = document.querySelector("#isbn").value;
+
+    const libro = { //Devuelve un objeto con los datos del formulario
+      titulo: titulo,
+      autor: autor,
+      isbn: isbn
+    };
+
+    return libro;
+}
+
+
+
+//Función añadir libro y sus datos a la biblioteca
+function addBookToLibrary(bookData) {
+    const newBook = new Libro(bookData.titulo, bookData.autor, bookData.isbn); //Crea una instancia de la clase libro
+    myFirstLibrary.agregarLibro(newBook); //Agrega el libro al array de libros mediante el método de la clase Biblioteca
+}
 
