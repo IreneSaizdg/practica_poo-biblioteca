@@ -127,44 +127,50 @@ class Biblioteca{
 
     buscarPorISBN(isbn){
         const libroEncontrado = this.libros.find((libro) => libro.isbn === isbn) //Devuelve el libro si lo encuentra, si no da undefined. 
-        if (libroEncontrado){
-            console.log(`El libro encontrado con ISBN ${libroEncontrado.isbn} es: "${libroEncontrado.titulo}" del autor "${libroEncontrado.autor}" y está "${libroEncontrado._estado}".`);
-            return libroEncontrado;
-        }else{
-            console.log(`Libro con isbn "${isbn}" no encontrado.`);
-            return undefined;
-        }
+        // if (libroEncontrado){
+        //     console.log(`El libro encontrado con ISBN ${libroEncontrado.isbn} es: "${libroEncontrado.titulo}" del autor "${libroEncontrado.autor}" y está "${libroEncontrado._estado}".`);
+        //     return libroEncontrado;
+        // }else{
+        //     console.log(`Libro con isbn "${isbn}" no encontrado.`);
+        //     return undefined;
+        // }
     }
 
     prestarLibro(isbn){
-        const libroADevolver = this.buscarPorISBN(isbn);
-        
-        if (!libroADevolver){
-            console.log("Este libro existe en esta biblioteca.");
-            return; //Para salir de la función
+        const libroAPrestar = this.buscarPorISBN(isbn); //devuelve true/ false/ undefined
+        if (libroAPrestar){//libro = true?
+            libroAPrestar.prestar()
+        }// else{} -> libro = false? -> no hace nada
+         
+        // if (!libroADevolver){
+        //     console.log("Este libro existe en esta biblioteca.");
+        //     return; //Para salir de la función
 
-        }else if (libroADevolver._estado === "prestado"){
-            console.log(`Este libro no está disponible.`)
+        // }else if (libroADevolver._estado === "prestado"){
+        //     console.log(`Este libro no está disponible.`)
 
-        }else if (libroADevolver._estado === "disponible"){
-            libroADevolver.prestar()
-            console.log(`Libro prestado, ahora está: "${libroADevolver._estado}"`)
-        }
+        // }else if (libroADevolver._estado === "disponible"){
+        //     libroADevolver.prestar()
+        //     console.log(`Libro prestado, ahora está: "${libroADevolver._estado}"`)
+        // }
     }
 
     devolverLibro(isbn){
         const libroADevolver = this.buscarPorISBN(isbn);
-
-        if (!libroADevolver){
-            console.log("No sepuede devolver poque este libro no pertenece a esta biblioteca.");
-            return;
-
-        }else if (libroADevolver._estado === "prestado"){
-            libroADevolver.devolver();
-            console.log(`Libro devuelto, ahora está: "${libroADevolver._estado}".`)
-        }else{
-            console.log(`Este libro ya estaba devuelto.`);
+        if (libroADevolver){//libro = true?
+            libroADevolver.devolver()
         }
+
+        // if (!libroADevolver){ //libro = false
+        //     console.log("No sepuede devolver poque este libro no pertenece a esta biblioteca.");
+        //     return;
+
+        // }else if (libroADevolver._estado === "prestado"){
+        //     libroADevolver.devolver();
+        //     console.log(`Libro devuelto, ahora está: "${libroADevolver._estado}".`)
+        // }else{
+        //     console.log(`Este libro ya estaba devuelto.`);
+        // }
     }
     
     mostrarLibros(){
@@ -284,7 +290,7 @@ function printBookRow() {
 }
 
 
-
+//TODO: fragment
 //TODO: crear evento RESERVA (funcionalidad)
     /*- Crear evento, 
         Como argumento toma (click, function(){})
@@ -296,3 +302,4 @@ function printBookRow() {
      /* Establecer la biblioteca completa en el Web Storage??
     */
 //TODO: css
+//TODO: corregir cambiar estado a un booleano.
